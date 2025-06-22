@@ -1,0 +1,212 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #ffe6e6, #f9e3e3, #ffd6e7);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #d6336c;
+}
+
+main {
+  margin-top: 20px;
+}
+
+.btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #d6336c;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #a5274a;
+}
+
+/* Love Meter */
+#love-meter {
+  margin: 20px 0;
+}
+
+#love-meter button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#love-meter button:hover {
+  background-color: #ff4757;
+}
+
+#result {
+  font-size: 1.2rem;
+  color: #d6336c;
+  margin-top: 10px;
+}
+
+/* Virtual Birthday Cake */
+#cake {
+  font-size: 5rem;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: transform 0.3s;
+}
+
+#cake:hover {
+  transform: scale(1.1);
+}
+
+#message {
+  font-size: 1.5rem;
+  color: #d6336c;
+  margin-top: 10px;
+}
+
+/* Birthday Cake Page */
+#cake-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#cake {
+  font-size: 5rem;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+#cake:hover {
+  transform: scale(1.1);
+}
+
+#candles {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+}
+
+#message {
+  font-size: 1.5rem;
+  color: #d6336c;
+  margin-top: 20px;
+}
+
+/* Gallery and Lightbox Styles */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.gallery img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  animation: scaleIn 0.3s ease-in-out;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); }
+  to { transform: scale(1); }
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+  border: 5px solid white;
+}
+
+.lightbox-caption {
+  color: white;
+  font-size: 1.3rem;
+  margin-top: 15px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.subtitle {
+  font-style: italic;
+  color: #d6336c;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.btn-glow {
+  animation: glow 2s infinite alternate;
+  box-shadow: 0 0 10px rgba(214, 51, 108, 0.5);
+  transition: all 0.3s;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px rgba(214, 51, 108, 0.5); }
+  to { box-shadow: 0 0 15px rgba(214, 51, 108, 0.8); }
+}
+
+.btn-glow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(214, 51, 108, 1);
+}

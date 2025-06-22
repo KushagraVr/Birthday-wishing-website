@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Memories</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Floating hearts animation */
+    .heart {
+      position: fixed;
+      font-size: 20px;
+      color: #ff6b6b;
+      pointer-events: none;
+      animation: float 4s ease-in-out infinite;
+      opacity: 0;
+      z-index: 100;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Page background effect */
+    .background-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    /* Memory caption */
+    .memory-caption {
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-style: italic;
+      color: #d6336c;
+      opacity: 0;
+      transition: opacity 0.3s, bottom 0.3s;
+    }
+
+    .memory-frame:hover .memory-caption {
+      opacity: 1;
+      bottom: -25px;
+    }
+
+    .memory-frame {
+      position: relative;
+      padding: 10px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transform: rotate(0deg);
+      transition: transform 0.3s, box-shadow 0.3s;
+      margin-bottom: 30px;
+    }
+
+    .memory-frame:nth-child(odd) {
+      transform: rotate(-2deg);
+    }
+
+    .memory-frame:nth-child(even) {
+      transform: rotate(2deg);
+    }
+
+    .memory-frame:hover {
+      transform: rotate(0) scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    .title-decoration {
+      display: inline-block;
+      margin: 0 15px;
+      font-size: 24px;
+      color: #ff6b6b;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.2);
+      }
+    }
+
+    .page-title {
+      background: linear-gradient(45deg, #ff6b6b, #d6336c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradient 5s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-hearts" id="bgHearts"></div>
+
+  <header>
+    <h1><span class="title-decoration">✨</span><span class="page-title">Our Memories</span><span
+        class="title-decoration">✨</span></h1>
+    <p class="subtitle">Every moment with you is a treasure 💖</p>
+  </header>
+
+  <main>
+    <div class="gallery">
+      <div class="memory-frame">
+        <img src="photo1.jpg" alt="Memory 1" onclick="openLightbox('photo1.jpg', '')">
+        <div class="memory-caption"></div>
+      </div>
+      <div class="memory-frame">
+        <img src="photo2.jpg" alt="Memory 2" onclick="openLightbox('photo2.jpg', '')">
+        <div class="memory-caption"></div>
+      </div>
+      <div class="memory-frame">
+        <img src="photo3.jpg" alt="Memory 3" onclick="openLightbox('photo3.jpg', '')">
+        <div class="memory-caption"></div>
+      </div>
+      <div class="memory-frame">
+        <img src="photo4.jpg" alt="Memory 4" onclick="openLightbox('photo4.jpg', '')">
+        <div class="memory-caption"></div>
+      </div>
+      <div class="memory-frame">
+        <img src="photo5.jpg" alt="Memory 5" onclick="openLightbox('photo5.jpg',)">
+        <div class="memory-caption"></div>
+      </div>
+      <div class="memory-frame">
+        <img src="photo6.jpg" alt="Memory 6" onclick="openLightbox('photo6.jpg',)">
+        <div class="memory-caption">Special moment</div>
+      </div>
+    </div>
+
+    <a href="index.html" class="btn btn-glow">Back to Home</a>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="Enlarged Memory">
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Lightbox functionality
+    function openLightbox(imageSrc, caption) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+
+      lightbox.style.display = 'flex';
+      lightboxImg.src = imageSrc;
+
+      if (caption) {
+        lightboxCaption.textContent = caption;
+      }
+
+      // Create hearts animation when opening lightbox
+      createHearts(20);
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.style.display = 'none';
+    }
+
+    // Create floating hearts
+    function createHearts(count) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.innerHTML = '❤️';
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+          document.body.appendChild(heart);
+
+          // Remove heart after animation completes
+          setTimeout(() => {
+            heart.remove();
+          }, 6000);
+        }, i * 300);
+      }
+    }
+
+    // Create background hearts
+    function createBackgroundHearts() {
+      const container = document.getElementById('bgHearts');
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.opacity = 0.1;
+        heart.style.position = 'absolute';
+        heart.style.animation = 'none';
+        container.appendChild(heart);
+      }
+    }
+
+    // Initialize background hearts
+    document.addEventListener('DOMContentLoaded', () => {
+      createBackgroundHearts();
+
+      // Create occasional floating hearts
+      setInterval(() => {
+        createHearts(1);
+      }, 3000);
+    });
+  </script>
+</body>
+
+</html>

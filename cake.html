@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blow Out the Candles</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .cake-page {
+      background: linear-gradient(to bottom, #ffe6f2, #ffc2d6);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .cake-title {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #ff4081;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      animation: bounce 2s infinite alternate;
+    }
+    
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    
+    #cake-container {
+      position: relative;
+      margin: 40px auto;
+      max-width: 400px;
+    }
+    
+    .cake-plate {
+      background: #e0e0e0;
+      height: 20px;
+      width: 280px;
+      border-radius: 50%;
+      margin: 0 auto;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    
+    .cake {
+      position: relative;
+      width: 250px;
+      height: 200px;
+      background: linear-gradient(to right, #ff9ebd, #ff6b9e);
+      margin: 0 auto 10px;
+      border-radius: 10px 10px 60px 60px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .cake:before {
+      content: '';
+      position: absolute;
+      width: 240px;
+      height: 60px;
+      background: #ffc7dd;
+      top: 70px;
+      left: 5px;
+      border-radius: 5px;
+    }
+    
+    .cake:after {
+      content: '';
+      position: absolute;
+      width: 240px;
+      height: 60px;
+      background: #ffa8c7;
+      top: 140px;
+      left: 5px;
+      border-radius: 5px 5px 50px 50px;
+    }
+    
+    .candle {
+      position: absolute;
+      width: 15px;
+      height: 45px;
+      background: #fdfd96;
+      top: -45px;
+      border-radius: 5px;
+      z-index: 1;
+      box-shadow: 0 0 10px rgba(253, 253, 150, 0.8);
+    }
+    
+    .flame {
+      position: absolute;
+      width: 15px;
+      height: 30px;
+      background: linear-gradient(to bottom, #ff5722, #ffeb3b);
+      border-radius: 50% 50% 20% 20%;
+      top: -30px;
+      left: 0;
+      animation: flicker 0.6s infinite alternate;
+      box-shadow: 0 0 20px #ff5722, 0 0 40px #ff9800;
+      transform-origin: center bottom;
+    }
+    
+    @keyframes flicker {
+      0% { transform: scaleY(1) rotate(-1deg); }
+      25% { transform: scaleY(1.1) rotate(1deg); }
+      50% { transform: scaleY(0.9) rotate(-1deg); }
+      75% { transform: scaleY(1.2) rotate(1deg); }
+      100% { transform: scaleY(1) rotate(-2deg); }
+    }
+    
+    .candle:nth-child(1) { left: 50px; }
+    .candle:nth-child(2) { left: 90px; }
+    .candle:nth-child(3) { left: 130px; }
+    .candle:nth-child(4) { left: 170px; }
+    .candle:nth-child(5) { left: 210px; }
+    
+    .frosting {
+      position: absolute;
+      height: 20px;
+      width: 240px;
+      background: #ffffff;
+      top: -10px;
+      left: 5px;
+      border-radius: 10px;
+      z-index: 0;
+    }
+    
+    .sprinkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #ff5252;
+      z-index: 2;
+    }
+    
+    #message {
+      font-size: 1.8rem;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #ff4081;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    
+    .balloon {
+      position: fixed;
+      width: 30px;
+      height: 40px;
+      background: #ff6b6b;
+      border-radius: 50%;
+      animation: float 8s infinite;
+      opacity: 0;
+    }
+    
+    .balloon:before {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 15px;
+      background: #999;
+      bottom: -15px;
+      left: 12.5px;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-20vh); opacity: 0; }
+    }
+    
+    .btn-celebrate {
+      background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+      transition: all 0.3s;
+      margin-top: 30px;
+      font-size: 1.2rem;
+      display: inline-block;
+      text-decoration: none;
+    }
+    
+    .btn-celebrate:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(255, 107, 107, 0.6);
+      background: linear-gradient(to right, #ff5252, #ff7676);
+    }
+    
+    .cake-wishes {
+      margin-top: 40px;
+      font-style: italic;
+      color: #d6336c;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      display: none;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #f0f;
+      animation: confetti-fall 4s ease-in-out;
+    }
+    
+    @keyframes confetti-fall {
+      0% { transform: translateY(-10px) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cake-page">
+    <header>
+      <h1 class="cake-title">Make a Wish & Blow Out the Candles! 🎂</h1>
+    </header>
+    <main>
+      <div id="cake-container">
+        <div class="cake" onclick="blowCandles()">
+          <div class="frosting"></div>
+          <div class="candle" id="candle1"><div class="flame" id="flame1"></div></div>
+          <div class="candle" id="candle2"><div class="flame" id="flame2"></div></div>
+          <div class="candle" id="candle3"><div class="flame" id="flame3"></div></div>
+          <div class="candle" id="candle4"><div class="flame" id="flame4"></div></div>
+          <div class="candle" id="candle5"><div class="flame" id="flame5"></div></div>
+        </div>
+        <div class="cake-plate"></div>
+        <p id="message"></p>
+      </div>
+      
+      <div class="cake-wishes" id="wishes">
+        <p>Dear Random,</p>
+        <p>On your XYth birthday, I wish you endless joy, and all my love, and more and more beautiful moments. May all your dreams come true and may this year be filled with amazing opportunities and success</p>
+        <p>You light up my life just like these candles light up this cake. Thank you for being the amazing person you are!</p>
+        <p>Enjoy your day.</p>
+      </div>
+      
+      <a href="index.html" class="btn-celebrate">Back to Home</a>
+    </main>
+  </div>
+  
+  <script>
+    // Create sprinkles on the cake
+    function createSprinkles() {
+      const colors = ['#FF5252', '#FFEB3B', '#2196F3', '#4CAF50', '#9C27B0'];
+      for (let i = 0; i < 50; i++) {
+        const sprinkle = document.createElement('div');
+        sprinkle.className = 'sprinkle';
+        sprinkle.style.left = Math.floor(Math.random() * 240) + 5 + 'px';
+        sprinkle.style.top = Math.floor(Math.random() * 20) - 10 + 'px';
+        sprinkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        document.querySelector('.frosting').appendChild(sprinkle);
+      }
+    }
+    
+    // Create balloons
+    function createBalloons() {
+      const colors = ['#FF5252', '#FFEB3B', '#2196F3', '#4CAF50', '#9C27B0', '#FF9800', '#03A9F4'];
+      const container = document.querySelector('.cake-page');
+      
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const balloon = document.createElement('div');
+          balloon.className = 'balloon';
+          balloon.style.left = Math.random() * 100 + 'vw';
+          balloon.style.animationDelay = Math.random() * 2 + 's';
+          balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          container.appendChild(balloon);
+          
+          // Remove balloon after animation
+          setTimeout(() => {
+            balloon.remove();
+          }, 8000);
+        }, i * 500);
+      }
+    }
+    
+    // Create confetti
+    function createConfetti() {
+      const colors = ['#FF5252', '#FFEB3B', '#2196F3', '#4CAF50', '#9C27B0', '#FF9800', '#03A9F4'];
+      const container = document.querySelector('.cake-page');
+      
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.top = '0';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          
+          // Random shapes
+          if (Math.random() > 0.5) {
+            confetti.style.borderRadius = '50%';
+          } else {
+            confetti.style.width = '8px';
+            confetti.style.height = '8px';
+            confetti.style.transform = 'rotate(' + Math.random() * 45 + 'deg)';
+          }
+          
+          container.appendChild(confetti);
+          
+          // Remove confetti after animation
+          setTimeout(() => {
+            confetti.remove();
+          }, 4000);
+        }, i * 40);
+      }
+    }
+    
+    // Blow out the candles
+    function blowCandles() {
+      // Extinguish flames one by one with delay
+      for (let i = 1; i <= 5; i++) {
+        setTimeout(() => {
+          const flame = document.getElementById('flame' + i);
+          if (flame) {
+            flame.style.opacity = '0';
+            flame.style.transition = 'opacity 0.3s';
+            
+            // Create smoke effect
+            const smoke = document.createElement('div');
+            smoke.style.position = 'absolute';
+            smoke.style.width = '15px';
+            smoke.style.height = '20px';
+            smoke.style.backgroundColor = 'rgba(200, 200, 200, 0.5)';
+            smoke.style.borderRadius = '50%';
+            smoke.style.top = '-30px';
+            smoke.style.left = '0';
+            smoke.style.animation = 'float 2s forwards';
+            document.getElementById('candle' + i).appendChild(smoke);
+            
+            // Remove smoke after animation
+            setTimeout(() => {
+              smoke.remove();
+            }, 2000);
+          }
+        }, i * 300);
+      }
+      
+      // Show celebration message after all candles are out
+      setTimeout(() => {
+        const message = document.getElementById('message');
+        message.textContent = "Happy XYth Birthday, Random! 🌟 Your wish will come true!";
+        message.style.opacity = '1';
+        
+        // Show wishes
+        document.getElementById('wishes').style.display = 'block';
+        
+        // Launch confetti
+        createConfetti();
+        
+        // Launch balloons
+        createBalloons();
+      }, 2000);
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      createSprinkles();
+      
+      // Add hover effect to the cake
+      const cake = document.querySelector('.cake');
+      cake.addEventListener('mouseover', () => {
+        cake.style.transform = 'scale(1.05)';
+      });
+      cake.addEventListener('mouseout', () => {
+        cake.style.transform = 'scale(1)';
+      });
+      
+      // Add hint message
+      setTimeout(() => {
+        const hintMessage = document.createElement('p');
+        hintMessage.textContent = "Click on the cake to blow out the candles!";
+        hintMessage.style.color = '#888';
+        hintMessage.style.fontStyle = 'italic';
+        hintMessage.style.animation = 'fadeInOut 2s infinite';
+        
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes fadeInOut {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+          }
+        `;
+        document.head.appendChild(style);
+        
+        document.getElementById('cake-container').appendChild(hintMessage);
+        
+        // Remove hint after 5 seconds
+        setTimeout(() => {
+          hintMessage.style.display = 'none';
+        }, 5000);
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
