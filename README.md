@@ -1,4 +1,4 @@
-# Birthday Celebration Website 🎂
+# Birthday wishing Website 🎂
 
 A beautiful, interactive birthday website featuring multiple pages with animations, games, and personalized messages.
 
